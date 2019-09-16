@@ -20,6 +20,8 @@ module SpanishVocab
           list_topics
         elsif input == "study"
           flashcards
+        elsif input == "quiz"
+          quiz
         elsif input == "exit"
           break
         else
@@ -32,6 +34,7 @@ module SpanishVocab
       puts ""
       Topic.all.each_with_index{|topic, index| puts "Type #{index + 1} for #{topic.name}"}
       puts "Type 'study' to test your knowledge with flashcard mode"
+      puts "Type 'quiz' to take a quiz on 10 random vocab words"
       puts "Type 'exit' to exit the program"
       puts ""
     end
@@ -105,6 +108,12 @@ module SpanishVocab
       SpanishVocab::Topic.all.each do |topic|
         topic.add_vocabulary(SpanishVocab::Scraper.scrape_vocab("https://www.e-spanyol.com/" + topic.link))
       end
+    end
+    
+    def quiz
+      puts "Welcome to the quiz:"
+      puts "Don't stress, this won't go on your report card!"
+      #takes 10 random vocab words and tests the user. At the end shows their score and any they got wrong.
     end
     
   end

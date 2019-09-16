@@ -25,6 +25,6 @@ Topic class
 
 Cli Class
 - the cli class runs our program by having the functions necessary to execute the application
-- given functions include: run, list_topics, display_vocab, flashcards, flashcards_english, flashcards_spanish, make_topics, and add_vocab_to_topics
+- given functions include: run, list_topics, display_vocab, flashcards, english_flashcards, spanish_flashcards, make_topics, and add_vocab_to_topics
 - 
 ##I'd like to make a quiz function that takes 10 random vocab words from Vocab.all and tells the user at the end how many they got wrong and which words they need to review.

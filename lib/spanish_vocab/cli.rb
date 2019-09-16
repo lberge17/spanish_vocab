@@ -49,10 +49,10 @@ module SpanishVocab
         puts "Note: if you wish to exit this mode you can type 'exit' at any time."
         input = gets.chomp
         if input == "e"
-          flashcards_english
+          english_flashcards
         elsif input == "s"
           puts "Testing your spanish"
-          flashcards_spanish
+          spanish_flashcards
         elsif input == "exit"
           "Exiting test mode."
           break
@@ -62,7 +62,7 @@ module SpanishVocab
       end
     end
     
-    def flashcards_english
+    def english_flashcards
       puts "Enter the number of the topic you want to test your knowledge in:"
       input = gets.chomp.to_i
       SpanishVocab::Topic.all[input - 1].vocabulary.each do |vocab|
@@ -79,7 +79,7 @@ module SpanishVocab
       end
     end
     
-    def flashcards_spanish
+    def spanish_flashcards
       puts "Enter the number of the topic you want to test your knowledge in:"
       input = gets.chomp.to_i
       SpanishVocab::Topic.all[input - 1].vocabulary.each do |vocab|

@@ -1,9 +1,10 @@
 module SpanishVocab
   class CLI
     def run
+      make_topics
+      add_vocab
       puts "Welcome to the SpanishVocab app"
       puts "Hope you're ready to learn some Spanish!"
-      make_topics
       #puts "Or you can be tested on them"
       #puts "Or you can exit at any time"
       #puts "What would you like to do?"
@@ -25,13 +26,17 @@ module SpanishVocab
     end
     
     def make_topics
-      #uses Scraper to make the topics
-      SpanishVocab::Topic.create_from_collection(SpanishVocab::Scraper.scrape("https://www.e-spanyol.com/basic-spanish-vocabulary.php"))
-      Topic.all.each{|topic| puts topic.name}
+      topic_array= SpanishVocab::Scraper.scrape("https://www.e-spanyol.com/basic-spanish-vocabulary.php")
+      SpanishVocab::Topic.create_from_collection(topic_array)
     end
     
     def add_vocab
-      #adds vocab using second scraper
+      SpanishVocab::Topic.all.each do |topic|
+        SpanishVocab::Scraper.scrape_vocab("https://www.e-spanyol.com/" + topic.link).each do |vocab_hash|
+          topic.vocabulary << SpanishVocab::Vocab.new(vocab_hash)
+        end
+      end
+      puts SpanishVocab::Topic.all[0].vocabulary ##has instances but those instances of vocab don't have translation or english attributes
     end
     
   end

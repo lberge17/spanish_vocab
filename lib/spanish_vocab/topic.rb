@@ -12,6 +12,12 @@ module SpanishVocab
       topic_array.each {|topic_hash| topic = SpanishVocab::Topic.new(topic_hash)}
     end
     
+    def add_vocabulary(vocab_array)
+      vocab_array.each do |vocab_hash|
+        @vocabulary << SpanishVocab::Vocab.new(vocab_hash)
+      end
+    end
+    
     def self.all
       @@all
     end

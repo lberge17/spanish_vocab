@@ -3,22 +3,27 @@ module SpanishVocab
     def run
       make_topics
       add_vocab
-      puts "Welcome to the SpanishVocab app"
       puts "Hope you're ready to learn some Spanish!"
-      #puts "Or you can be tested on them"
-      #puts "Or you can exit at any time"
-      #puts "What would you like to do?"
-      #gets input
-      #puts "Executing what you want"
-      #loops until a user exits
+      list_topics
+      command
+    end
+    
+    def command
+      #asks what you what to do and executes
     end
     
     def list_topics
-      #list all topics
+      puts ""
+      Topic.all.each_with_index{|topic, index| puts "Type #{index + 1} for #{topic.name}"}
+      puts "Type 'test' to test your knowledge"
+      puts "Type 'exit' to exit the program"
+      puts ""
     end
     
-    def display_vocab
-      #display vocab based on topic selected
+    def display_vocab(n)
+      SpanishVocab::Topic.all[n].vocabulary.each do |vocab|
+        puts "#{vocab.translation} - #{vocab.spanish}"
+      end
     end
     
     def test
@@ -32,8 +37,7 @@ module SpanishVocab
     
     def add_vocab
       SpanishVocab::Topic.all.each do |topic|
-        vocab_array = SpanishVocab::Scraper.scrape_vocab("https://www.e-spanyol.com/" + topic.link)
-        topic.vocabulary << SpanishVocab::Vocab.create_from_collection(vocab_array)
+        topic.add_vocabulary(SpanishVocab::Scraper.scrape_vocab("https://www.e-spanyol.com/" + topic.link))
       end
     end
     

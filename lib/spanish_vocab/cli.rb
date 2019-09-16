@@ -9,7 +9,23 @@ module SpanishVocab
     end
     
     def command
-      #asks what you what to do and executes
+      loop do
+        puts ""
+        puts "What topic would you like to view? Type list to see options again."
+        input = gets.chomp
+
+        if input.to_i.between?(1, 17)
+          display_vocab(input.to_i - 1)
+        elsif input == "list"
+          list_topics
+        elsif input == "test"
+          test
+        elsif input == "exit"
+          break
+        else
+          puts "I'm sorry, I don't think I understood."
+        end
+      end
     end
     
     def list_topics

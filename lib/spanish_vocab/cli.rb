@@ -18,8 +18,8 @@ module SpanishVocab
           display_vocab(input.to_i - 1)
         elsif input == "list"
           list_topics
-        elsif input == "test"
-          test
+        elsif input == "study"
+          flashcards
         elsif input == "exit"
           break
         else
@@ -31,7 +31,7 @@ module SpanishVocab
     def list_topics
       puts ""
       Topic.all.each_with_index{|topic, index| puts "Type #{index + 1} for #{topic.name}"}
-      puts "Type 'test' to test your knowledge"
+      puts "Type 'study' to test your knowledge with flashcard mode"
       puts "Type 'exit' to exit the program"
       puts ""
     end
@@ -42,17 +42,17 @@ module SpanishVocab
       end
     end
     
-    def test
-      puts "Welcome to test mode:"
+    def flashcards
+      puts "Welcome to flashcard mode:"
       loop do
         puts "Would you like the test words in English or in Spanish? Type 'e' or 's'."
-        puts "Note: if you wish to exit this mode now or during a test, you can type 'exit'."
+        puts "Note: if you wish to exit this mode you can type 'exit' at any time."
         input = gets.chomp
         if input == "e"
-          test_english
+          flashcards_english
         elsif input == "s"
           puts "Testing your spanish"
-          #test_spanish
+          flashcards_spanish
         elsif input == "exit"
           "Exiting test mode."
           break
@@ -62,7 +62,7 @@ module SpanishVocab
       end
     end
     
-    def test_english
+    def flashcards_english
       puts "Enter the number of the topic you want to test your knowledge in:"
       input = gets.chomp.to_i
       SpanishVocab::Topic.all[input - 1].vocabulary.each do |vocab|
@@ -79,8 +79,21 @@ module SpanishVocab
       end
     end
     
-    def test_spanish
-      
+    def flashcards_spanish
+      puts "Enter the number of the topic you want to test your knowledge in:"
+      input = gets.chomp.to_i
+      SpanishVocab::Topic.all[input - 1].vocabulary.each do |vocab|
+        puts "What is #{vocab.spanish} in English?"
+        input = gets.chomp
+        if input == "#{vocab.translation}"
+          puts "Correct! Next:"
+        elsif input == "exit"
+          puts "Exiting test."
+          break
+        else
+          puts "Sorry, the answer was #{vocab.translation}"
+        end
+      end
     end
     
     def make_topics

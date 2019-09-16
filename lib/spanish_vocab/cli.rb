@@ -24,7 +24,7 @@ module SpanishVocab
         puts "Type 'options' to see options again."
         input = gets.chomp
         puts ""
-        if input.to_i.between?(1, 17)
+        if input.to_i.between?(1, SpanishVocab::Topic.all.size)
           display_vocab(input.to_i - 1)
         elsif input == "options"
           list_commands
@@ -68,7 +68,6 @@ module SpanishVocab
         if input == "e"
           english_flashcards
         elsif input == "s"
-          puts "Testing your spanish"
           spanish_flashcards
         elsif input == "exit"
           "Exiting test mode."
@@ -149,7 +148,7 @@ module SpanishVocab
       count = 0
       review = []
       10.times do
-        vocab = SpanishVocab::Vocab.all[rand(0..901)]
+        vocab = SpanishVocab::Vocab.all[rand(0...SpanishVocab::Vocab.all.size)]
         puts ""
         puts "What is #{vocab.translation} in Spanish?"
         input = gets.chomp
@@ -174,7 +173,7 @@ module SpanishVocab
       count = 0
       review = []
       10.times do
-        vocab = SpanishVocab::Vocab.all[rand(0..901)]
+        vocab = SpanishVocab::Vocab.all[rand(0...SpanishVocab::Vocab.all.size)]
         puts ""
         puts "What is #{vocab.spanish} in English?"
         input = gets.chomp

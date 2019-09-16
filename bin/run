@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require "./lib/spanish_vocab"
+
+SpanishVocab::CLI.new.run

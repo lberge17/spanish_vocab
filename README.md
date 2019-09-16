@@ -1,8 +1,6 @@
 # SpanishVocab
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/spanish_vocab`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem uses nokogiri to parse through spanish vocabulary words from "https://www.e-spanyol.com/basic-spanish-vocabulary.php". It then uses this data to make a CLI application where the user can view vocabulary lists by topic or test their knowledge in a given topic.
 
 ## Installation
 
@@ -22,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Run bin/run in the terminal while in the spanish_vocab directory to open the CLI application.
 
 ## Development
 

@@ -1,6 +1,5 @@
-require "spanish_vocab/version"
-
-module SpanishVocab
-  class Error < StandardError; end
-  # Your code goes here...
-end
+require_relative "spanish_vocab/cli"
+require_relative "spanish_vocab/scraper"
+require_relative "spanish_vocab/topic"
+require_relative "spanish_vocab/version"
+require_relative "spanish_vocab/vocab"

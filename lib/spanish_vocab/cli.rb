@@ -44,21 +44,39 @@ module SpanishVocab
     
     def test
       puts "Welcome to test mode:"
-      puts "Would you like the test words in English or in Spanish? Type 'e' or 's'."
-      input = gets.chomp
-      #if user wants the test given in english (they type in spanish)
-        #test_english
-      #elsif user wants the test given in spanish
-        #test_spanish
-      #elsif user types "exit"
-        #break
-      #else
-        #input invalid error, start test mode again.
-      #end
+      loop do
+        puts "Would you like the test words in English or in Spanish? Type 'e' or 's'."
+        puts "Note: if you wish to exit this mode now or during a test, you can type 'exit'."
+        input = gets.chomp
+        if input == "e"
+          test_english
+        elsif input == "s"
+          puts "Testing your spanish"
+          #test_spanish
+        elsif input == "exit"
+          "Exiting test mode."
+          break
+        else
+          puts "Invalid input. Let's try this again."
+        end
+      end
     end
     
     def test_english
-      
+      puts "Enter the number of the topic you want to test your knowledge in:"
+      input = gets.chomp.to_i
+      SpanishVocab::Topic.all[input - 1].vocabulary.each do |vocab|
+        puts "What is #{vocab.translation} in spanish?"
+        input = gets.chomp
+        if input == "#{vocab.spanish}"
+          puts "Correct! Next:"
+        elsif input == "exit"
+          puts "Exiting test."
+          break
+        else
+          puts "Sorry, the answer was #{vocab.spanish}. Next:"
+        end
+      end
     end
     
     def test_spanish

@@ -11,6 +11,7 @@ module SpanishVocab
     def command
       loop do
         puts ""
+        puts "MAIN MENU"
         puts "What topic would you like to view? Type list to see options again."
         input = gets.chomp
 

@@ -3,7 +3,8 @@ module SpanishVocab
     attr_accessor :spanish, :translation
     @@all = []
 
-    def initialize
+    def initialize(vocab_hash)
+      vocab_hash.each{|k, v| self.send(("#{k}="), v)}
       @@all << self
     end
 

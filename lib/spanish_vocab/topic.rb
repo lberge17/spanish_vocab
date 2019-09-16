@@ -7,8 +7,6 @@ module SpanishVocab
       topic_hash.each{|k, v| self.send(("#{k}="), v)}
       @@all << self
     end
-
-    #define a function to add vocabulary to the Topic instance
     
     def self.create_from_collection(topic_array)
       topic_array.each {|topic_hash| topic = SpanishVocab::Topic.new(topic_hash)}

@@ -3,46 +3,44 @@ module SpanishVocab
     def run
       make_topics
       add_vocab
-      puts "Hope you're ready to learn some Spanish!" ## try to abstract away this string
-      list_topics
-      command ##see if this can be more consistent with other methods
+      list_commands
+      main_menu
     end
 
-    def command
+    def main_menu
       loop do
         puts ""
         puts "MAIN MENU"
-        puts "What topic would you like to view? Type list to see options again."
+        puts "What topic would you like to view? Type 'options' to see options again."
         input = gets.chomp
-
+        puts ""
         if input.to_i.between?(1, 17)
-          puts ""
           display_vocab(input.to_i - 1)
+        elsif input == "options"
+          list_commands
         elsif input == "list"
-          puts ""
           list_topics
         elsif input == "study"
-          puts ""
           flashcards
         elsif input == "quiz"
-          puts ""
           quiz
         elsif input == "exit"
           break
         else
-          puts ""
           puts "I'm sorry, I don't think I understood."
         end
       end
     end
 
-    def list_topics
-      puts ""
-      Topic.all.each_with_index{|topic, index| puts "Type #{index + 1} for #{topic.name}"}
+    def list_commands
+      puts "Type 'list' to view and select a topic"
       puts "Type 'study' to test your knowledge with flashcard mode"
       puts "Type 'quiz' to take a quiz on 10 random vocab words"
       puts "Type 'exit' to exit the program"
-      puts ""
+    end
+
+    def list_topics
+      Topic.all.each_with_index{|topic, index| puts "Type #{index + 1} for #{topic.name}"}
     end
 
     def display_vocab(n)
@@ -71,9 +69,9 @@ module SpanishVocab
       end
     end
 
-    def english_flashcards
+    def english_flashcards #need to refactor this with spanish flashcards
       puts "Enter the number of the topic you want to test your knowledge in:"
-      input = gets.chomp.to_i
+      input = gets.chomp.to_i    #need to account for invalid input or exit
       SpanishVocab::Topic.all[input - 1].vocabulary.each do |vocab|
         puts "What is #{vocab.translation} in spanish?"
         input = gets.chomp
@@ -88,7 +86,7 @@ module SpanishVocab
       end
     end
 
-    def spanish_flashcards
+    def spanish_flashcards 
       puts "Enter the number of the topic you want to test your knowledge in:"
       input = gets.chomp.to_i
       SpanishVocab::Topic.all[input - 1].vocabulary.each do |vocab|
@@ -137,7 +135,7 @@ module SpanishVocab
       end
     end
 
-    def quiz_in_english
+    def quiz_in_english #need to refactor this with quiz in spanish
       count = 0
       review = []
       10.times do

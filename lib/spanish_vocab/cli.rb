@@ -113,21 +113,48 @@ module SpanishVocab
     def quiz
       puts "Welcome to the quiz:"
       puts "Don't stress, this won't go on your report card!"
+      puts "To leave quiz mode you can type 'exit' at any point"
+      loop do
+        count = 0
+        review = []
+        puts "Would you like to view the words in English or Spanish? Type 'e' or 's'"
+        input = gets.chomp
+        if input == 'e'
+          quiz_in_english
+        elsif input =='s'
+          quiz_in_spanish
+        elsif input == 'exit'
+          break
+        else
+          puts "Invalid input. Let's try this again."
+        end
+      end
+    end
+    
+    def quiz_in_english
       
+    end
+    
+    def quiz_in_spanish
       10.times do 
         vocab = SpanishVocab::Vocab.all[rand(0..901)]
         puts "What is #{vocab.spanish} in English?"
         input = gets.chomp
         if input == "#{vocab.translation}"
-          puts "Correct! Next:"
+          count += 1
         elsif input == "exit"
           puts "Exiting quiz."
           break
         else
-          puts "Sorry, the answer was #{vocab.translation}"
+          review << vocab.translation
         end
       end
-        
+      
+      puts "You got #{count} out of 10 questions correct."
+      if count != 10
+        puts "You might want to review: #{review.join(" ")}"
+      end
+      
       #takes 10 random vocab words and tests the user. At the end shows their score and any they got wrong.
     end
     

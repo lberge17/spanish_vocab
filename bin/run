@@ -2,4 +2,6 @@
 
 require "./lib/spanish_vocab"
 
+puts "Loading application..."
+puts "While you're waiting, get excited to learn some new Spanish vocabulary!"
 SpanishVocab::CLI.new.run

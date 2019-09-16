@@ -113,6 +113,21 @@ module SpanishVocab
     def quiz
       puts "Welcome to the quiz:"
       puts "Don't stress, this won't go on your report card!"
+      
+      10.times do 
+        vocab = SpanishVocab::Vocab.all[rand(0..901)]
+        puts "What is #{vocab.spanish} in English?"
+        input = gets.chomp
+        if input == "#{vocab.translation}"
+          puts "Correct! Next:"
+        elsif input == "exit"
+          puts "Exiting quiz."
+          break
+        else
+          puts "Sorry, the answer was #{vocab.translation}"
+        end
+      end
+        
       #takes 10 random vocab words and tests the user. At the end shows their score and any they got wrong.
     end
     

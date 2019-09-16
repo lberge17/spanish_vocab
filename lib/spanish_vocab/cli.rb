@@ -1,17 +1,27 @@
 module SpanishVocab
   class CLI
     def run
+      loading_message
       make_topics
       add_vocab
       list_commands
       main_menu
     end
+    
+    def loading_message
+      puts "Loading application..."
+      puts "-----------------------------"
+      puts "While you're waiting, get excited to learn some new Spanish vocabulary!"
+      puts "With this application, you can learn around 900 Spanish vocab words with vocab lists, flashcards, and a short quiz."
+      puts "-----------------------------"
+    end
 
     def main_menu
       loop do
-        puts ""
-        puts "MAIN MENU"
-        puts "What topic would you like to view? Type 'options' to see options again."
+        puts "-----------------------------"
+        puts "----------MAIN MENU----------"
+        puts "What would you like to do?"
+        puts "Type 'options' to see options again."
         input = gets.chomp
         puts ""
         if input.to_i.between?(1, 17)

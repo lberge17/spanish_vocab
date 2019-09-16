@@ -28,3 +28,11 @@ Cli Class
 - given functions include: run, list_topics, display_vocab, flashcards, english_flashcards, spanish_flashcards, make_topics, and add_vocab_to_topics
 - 
 ##I'd like to make a quiz function that takes 10 random vocab words from Vocab.all and tells the user at the end how many they got wrong and which words they need to review.
+
+
+
+Suggestions:
+
+- Welcome message with description of app while it's loading
+- In flashcard mode --- giving more tries to get the answer (with hint? starts with letter)
+- 

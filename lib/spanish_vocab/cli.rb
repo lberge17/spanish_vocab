@@ -3,9 +3,9 @@ module SpanishVocab
     def run
       make_topics
       add_vocab
-      puts "Hope you're ready to learn some Spanish!"
+      puts "Hope you're ready to learn some Spanish!" ## try to abstract away this string
       list_topics
-      command
+      command ##see if this can be more consistent with other methods
     end
 
     def command
@@ -106,7 +106,7 @@ module SpanishVocab
     end
 
     def make_topics
-      topic_array= SpanishVocab::Scraper.scrape("https://www.e-spanyol.com/basic-spanish-vocabulary.php")
+      topic_array = SpanishVocab::Scraper.scrape("https://www.e-spanyol.com/basic-spanish-vocabulary.php")
       SpanishVocab::Topic.create_from_collection(topic_array)
     end
 

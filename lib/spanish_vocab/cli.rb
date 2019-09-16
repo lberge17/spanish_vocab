@@ -43,7 +43,26 @@ module SpanishVocab
     end
     
     def test
-      #testing vocab in english or in spanish
+      puts "Welcome to test mode:"
+      puts "Would you like the test words in English or in Spanish? Type 'e' or 's'."
+      input = gets.chomp
+      #if user wants the test given in english (they type in spanish)
+        #test_english
+      #elsif user wants the test given in spanish
+        #test_spanish
+      #elsif user types "exit"
+        #break
+      #else
+        #input invalid error, start test mode again.
+      #end
+    end
+    
+    def test_english
+      
+    end
+    
+    def test_spanish
+      
     end
     
     def make_topics

@@ -32,11 +32,9 @@ module SpanishVocab
     
     def add_vocab
       SpanishVocab::Topic.all.each do |topic|
-        SpanishVocab::Scraper.scrape_vocab("https://www.e-spanyol.com/" + topic.link).each do |vocab_hash|
-          topic.vocabulary << SpanishVocab::Vocab.new(vocab_hash)
-        end
+        vocab_array = SpanishVocab::Scraper.scrape_vocab("https://www.e-spanyol.com/" + topic.link)
+        topic.vocabulary << SpanishVocab::Vocab.create_from_collection(vocab_array)
       end
-      puts SpanishVocab::Topic.all[0].vocabulary ##has instances but those instances of vocab don't have translation or english attributes
     end
     
   end

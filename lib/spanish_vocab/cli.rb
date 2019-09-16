@@ -7,7 +7,7 @@ module SpanishVocab
       list_topics
       command
     end
-    
+
     def command
       loop do
         puts ""
@@ -15,21 +15,26 @@ module SpanishVocab
         input = gets.chomp
 
         if input.to_i.between?(1, 17)
+          puts ""
           display_vocab(input.to_i - 1)
         elsif input == "list"
+          puts ""
           list_topics
         elsif input == "study"
+          puts ""
           flashcards
         elsif input == "quiz"
+          puts ""
           quiz
         elsif input == "exit"
           break
         else
+          puts ""
           puts "I'm sorry, I don't think I understood."
         end
       end
     end
-    
+
     def list_topics
       puts ""
       Topic.all.each_with_index{|topic, index| puts "Type #{index + 1} for #{topic.name}"}
@@ -38,13 +43,13 @@ module SpanishVocab
       puts "Type 'exit' to exit the program"
       puts ""
     end
-    
+
     def display_vocab(n)
       SpanishVocab::Topic.all[n].vocabulary.each do |vocab|
         puts "#{vocab.translation} - #{vocab.spanish}"
       end
     end
-    
+
     def flashcards
       puts "Welcome to flashcard mode:"
       loop do
@@ -64,7 +69,7 @@ module SpanishVocab
         end
       end
     end
-    
+
     def english_flashcards
       puts "Enter the number of the topic you want to test your knowledge in:"
       input = gets.chomp.to_i
@@ -81,7 +86,7 @@ module SpanishVocab
         end
       end
     end
-    
+
     def spanish_flashcards
       puts "Enter the number of the topic you want to test your knowledge in:"
       input = gets.chomp.to_i
@@ -98,25 +103,25 @@ module SpanishVocab
         end
       end
     end
-    
+
     def make_topics
       topic_array= SpanishVocab::Scraper.scrape("https://www.e-spanyol.com/basic-spanish-vocabulary.php")
       SpanishVocab::Topic.create_from_collection(topic_array)
     end
-    
+
     def add_vocab
       SpanishVocab::Topic.all.each do |topic|
         topic.add_vocabulary(SpanishVocab::Scraper.scrape_vocab("https://www.e-spanyol.com/" + topic.link))
       end
     end
-    
+
     def quiz
       puts "Welcome to the quiz:"
       puts "Don't stress, this won't go on your report card!"
       puts "To leave quiz mode you can type 'exit' at any point"
       loop do
-        count = 0
-        review = []
+        puts ""
+        puts "Starting new quiz..."
         puts "Would you like to view the words in English or Spanish? Type 'e' or 's'"
         input = gets.chomp
         if input == 'e'
@@ -130,14 +135,38 @@ module SpanishVocab
         end
       end
     end
-    
+
     def quiz_in_english
-      
-    end
-    
-    def quiz_in_spanish
-      10.times do 
+      count = 0
+      review = []
+      10.times do
         vocab = SpanishVocab::Vocab.all[rand(0..901)]
+        puts ""
+        puts "What is #{vocab.translation} in Spanish?"
+        input = gets.chomp
+        if input == "#{vocab.spanish}"
+          count += 1
+        elsif input == "exit"
+          puts "Exiting quiz."
+          break
+        else
+          review << vocab.spanish
+        end
+      end
+      puts ""
+      puts "You got #{count} out of 10 questions correct."
+      if count != 10
+        puts ""
+        puts "You might want to review: #{review.join(", ")}"
+      end
+    end
+
+    def quiz_in_spanish
+      count = 0
+      review = []
+      10.times do
+        vocab = SpanishVocab::Vocab.all[rand(0..901)]
+        puts ""
         puts "What is #{vocab.spanish} in English?"
         input = gets.chomp
         if input == "#{vocab.translation}"
@@ -149,13 +178,12 @@ module SpanishVocab
           review << vocab.translation
         end
       end
-      
+      puts ""
       puts "You got #{count} out of 10 questions correct."
       if count != 10
-        puts "You might want to review: #{review.join(" ")}"
+        puts ""
+        puts "You might want to review: #{review.join(", ")}"
       end
-      
-      #takes 10 random vocab words and tests the user. At the end shows their score and any they got wrong.
     end
     
   end

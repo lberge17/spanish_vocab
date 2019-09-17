@@ -134,14 +134,46 @@ module SpanishVocab
         puts "Would you like to view the words in English or Spanish? Type 'e' or 's'"
         input = gets.chomp
         if input == 'e'
-          quiz_in_english
+          quiz_set("english")
         elsif input =='s'
-          quiz_in_spanish
+          quiz_set("spanish")
         elsif input == 'exit'
           break
         else
           puts "Invalid input. Let's try this again."
         end
+      end
+    end
+
+    def quiz_set(language)
+      count = 0
+      review = []
+      10.times do
+        vocab = SpanishVocab::Vocab.all[rand(0...SpanishVocab::Vocab.all.size)]
+        if language == "english"
+          question = vocab.translation
+          answer = vocab.spanish
+        else
+          question = vocab.spanish
+          answer = vocab.translation
+        end
+        puts ""
+        puts "How do you say #{question}?"
+        input = gets.chomp
+        if input == "#{answer}"
+          count += 1
+        elsif input == "exit"
+          puts "Exiting quiz."
+          break
+        else
+          review << answer
+        end
+      end
+      puts ""
+      puts "You got #{count} out of 10 questions correct."
+      if count != 10
+        puts ""
+        puts "You might want to review: #{review.join(", ")}"
       end
     end
 

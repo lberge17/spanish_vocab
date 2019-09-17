@@ -27,6 +27,13 @@ module SpanishVocab
       end
     end
 
+    def list_commands
+      puts "Type 'list' to view and select a topic"
+      puts "Type 'study' to test your knowledge with flashcard mode"
+      puts "Type 'quiz' to take a quiz on 10 random vocab words"
+      puts "Type 'exit' to exit the program"
+    end
+
     def main_menu
       loop do
         puts "-----------------------------"
@@ -53,13 +60,6 @@ module SpanishVocab
       end
     end
 
-    def list_commands
-      puts "Type 'list' to view and select a topic"
-      puts "Type 'study' to test your knowledge with flashcard mode"
-      puts "Type 'quiz' to take a quiz on 10 random vocab words"
-      puts "Type 'exit' to exit the program"
-    end
-
     def list_topics
       Topic.all.each_with_index{|topic, index| puts "Type #{index + 1} for #{topic.name}"}
     end
@@ -71,8 +71,10 @@ module SpanishVocab
     end
 
     def flashcards
+      puts "-----------------------------"
       puts "Welcome to flashcard mode:"
       loop do
+        puts ""
         puts "Would you like the test words in English or in Spanish? Type 'e' or 's'."
         puts "Note: if you wish to exit this mode you can type 'exit' at any time."
         input = gets.chomp
@@ -109,13 +111,21 @@ module SpanishVocab
           end
           puts "How do you say #{question}?"
           input = gets.chomp
-          if input == "#{answer}"
+          if input == answer
             puts "Correct! Next:"
           elsif input == "exit"
             puts "Back to flashcard menu:"
             break
           else
-            puts "Sorry, the answer was #{answer}. Next:"
+            puts "That's not the answer I have. Hint: It starts with #{answer.split("")[0]}"
+            input = gets.chomp
+            if input == answer
+              puts "Correct! Second time's the charm. Next:"
+            elsif input == "exit"
+              break
+            else
+              puts "Sorry, the answer was #{answer}. Next:"
+            end
           end
         end
       else
@@ -125,6 +135,7 @@ module SpanishVocab
     end
 
     def quiz
+      puts "-----------------------------"
       puts "Welcome to the quiz:"
       puts "Don't stress, this won't go on your report card!"
       puts "To leave quiz mode you can type 'exit' at any point"

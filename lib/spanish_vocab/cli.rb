@@ -16,6 +16,17 @@ module SpanishVocab
       puts "-----------------------------"
     end
 
+    def make_topics
+      topic_array = SpanishVocab::Scraper.scrape("https://www.e-spanyol.com/basic-spanish-vocabulary.php")
+      SpanishVocab::Topic.create_from_collection(topic_array)
+    end
+
+    def add_vocab
+      SpanishVocab::Topic.all.each do |topic|
+        topic.add_vocabulary(SpanishVocab::Scraper.scrape_vocab("https://www.e-spanyol.com/" + topic.link))
+      end
+    end
+
     def main_menu
       loop do
         puts "-----------------------------"
@@ -113,17 +124,6 @@ module SpanishVocab
       end
     end
 
-    def make_topics
-      topic_array = SpanishVocab::Scraper.scrape("https://www.e-spanyol.com/basic-spanish-vocabulary.php")
-      SpanishVocab::Topic.create_from_collection(topic_array)
-    end
-
-    def add_vocab
-      SpanishVocab::Topic.all.each do |topic|
-        topic.add_vocabulary(SpanishVocab::Scraper.scrape_vocab("https://www.e-spanyol.com/" + topic.link))
-      end
-    end
-
     def quiz
       puts "Welcome to the quiz:"
       puts "Don't stress, this won't go on your report card!"
@@ -176,56 +176,5 @@ module SpanishVocab
         puts "You might want to review: #{review.join(", ")}"
       end
     end
-
-    def quiz_in_english #need to refactor this with quiz in spanish
-      count = 0
-      review = []
-      10.times do
-        vocab = SpanishVocab::Vocab.all[rand(0...SpanishVocab::Vocab.all.size)]
-        puts ""
-        puts "What is #{vocab.translation} in Spanish?"
-        input = gets.chomp
-        if input == "#{vocab.spanish}"
-          count += 1
-        elsif input == "exit"
-          puts "Exiting quiz."
-          break
-        else
-          review << vocab.spanish
-        end
-      end
-      puts ""
-      puts "You got #{count} out of 10 questions correct."
-      if count != 10
-        puts ""
-        puts "You might want to review: #{review.join(", ")}"
-      end
-    end
-
-    def quiz_in_spanish
-      count = 0
-      review = []
-      10.times do
-        vocab = SpanishVocab::Vocab.all[rand(0...SpanishVocab::Vocab.all.size)]
-        puts ""
-        puts "What is #{vocab.spanish} in English?"
-        input = gets.chomp
-        if input == "#{vocab.translation}"
-          count += 1
-        elsif input == "exit"
-          puts "Exiting quiz."
-          break
-        else
-          review << vocab.translation
-        end
-      end
-      puts ""
-      puts "You got #{count} out of 10 questions correct."
-      if count != 10
-        puts ""
-        puts "You might want to review: #{review.join(", ")}"
-      end
-    end
-    
   end
 end

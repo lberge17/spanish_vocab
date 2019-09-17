@@ -72,7 +72,7 @@ module SpanishVocab
 
     def flashcards
       puts "-----------------------------"
-      puts "Welcome to flashcard mode:"
+      puts "-------FLASHCARDS MODE-------"
       loop do
         puts ""
         puts "Would you like the test words in English or in Spanish? Type 'e' or 's'."
@@ -83,7 +83,7 @@ module SpanishVocab
         elsif input == "s"
           flashcard_set("spanish")
         elsif input == "exit"
-          "Exiting flashcard mode."
+          "Exiting flashcards mode."
           break
         else
           puts "Invalid input. Let's try this again."
@@ -96,7 +96,7 @@ module SpanishVocab
       puts "If you can't remember the numbers, type list to see topics."
       input = gets.chomp 
       if input == "exit"
-        puts "Back to flashcard menu:"
+        puts "Back to flashcards menu:"
       elsif input == "list"
         list_topics
         flashcard_set(language)
@@ -114,7 +114,7 @@ module SpanishVocab
           if input == answer
             puts "Correct! Next:"
           elsif input == "exit"
-            puts "Back to flashcard menu:"
+            puts "Back to flashcards menu:"
             break
           else
             puts "That's not the answer I have. Hint: It starts with #{answer.split("")[0]}"
@@ -136,7 +136,7 @@ module SpanishVocab
 
     def quiz
       puts "-----------------------------"
-      puts "Welcome to the quiz:"
+      puts "----------QUIZ MODE----------"
       puts "Don't stress, this won't go on your report card!"
       puts "To leave quiz mode you can type 'exit' at any point"
       loop do

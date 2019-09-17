@@ -9,13 +9,11 @@ module SpanishVocab
     end
     
     def self.create_from_collection(topic_array)
-      topic_array.each {|topic_hash| topic = SpanishVocab::Topic.new(topic_hash)}
+      topic_array.each{|topic_hash| topic = SpanishVocab::Topic.new(topic_hash)}
     end
     
     def add_vocabulary(vocab_array)
-      vocab_array.each do |vocab_hash|
-        @vocabulary << SpanishVocab::Vocab.new(vocab_hash)
-      end
+      vocab_array.each{|vocab_hash| @vocabulary << SpanishVocab::Vocab.new(vocab_hash)}
     end
     
     def self.all

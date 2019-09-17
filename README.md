@@ -2,6 +2,8 @@
 
 This gem uses nokogiri to parse through spanish vocabulary words from "https://www.e-spanyol.com/basic-spanish-vocabulary.php". It then uses this data to make a CLI application where the user can view vocabulary lists by topic or test their knowledge in a given topic.
 
+The application starts by showing the user the different options for how to interact with the vocab. These ways include a list mode, flashcard mod, and a quiz mode. The list mode simply lists the vocab of a given topic showing both the spanish word and translation. Theflashcard/study mode shows the user either the word and asks the user to type in the answer--if the user gets a word wrong they get one more try with a hint showing the first letter before the answer is revealed. The quiz mode takes ten random words from all the topics and asks the user to provide the answer--it shows how many questions the user got correct at the end and which words the user may want to review(i.e. the answers to the questions that were incorrect). Both flashcard and study mode can be given in either language, the user decides.
+
 ## Installation
 
 Add this line to your application's Gemfile:

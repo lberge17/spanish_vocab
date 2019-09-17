@@ -2,11 +2,11 @@ Basic Spanish CLI app gem
 
 How the CLI operates
 - Greets the user
-- lists topics of spanish vocab
-- ask the user which topic they'd like to explore
-- lists the vocab based on user input "(english translation) -- (spanish word/phrase)"
-- can also test user on the vocab of a given topic
-- prompts the user if they'd like to view another topic or leave
+- lists ways the user can interact with the vocab
+- ask the user what they like to do
+- can list vocab from a given topic
+- can also test user on the vocab of a given topic with flashcards
+- can also quiz the user on 10 random vocab words across all topics
 
 
 
@@ -25,14 +25,6 @@ Topic class
 
 Cli Class
 - the cli class runs our program by having the functions necessary to execute the application
-- given functions include: run, list_topics, display_vocab, flashcards, english_flashcards, spanish_flashcards, make_topics, and add_vocab_to_topics
-- 
-##I'd like to make a quiz function that takes 10 random vocab words from Vocab.all and tells the user at the end how many they got wrong and which words they need to review.
+- given functions include: run, list_topics, display_vocab, flashcards, flashcard_set, quiz, quiz_set, make_topics, and add_vocab_to_topics
 
 
-
-Suggestions:
-
-- Welcome message with description of app while it's loading
-- In flashcard mode --- giving more tries to get the answer (with hint? starts with letter)
-- 

@@ -66,11 +66,11 @@ module SpanishVocab
         puts "Note: if you wish to exit this mode you can type 'exit' at any time."
         input = gets.chomp
         if input == "e"
-          english_flashcards
+          flashcard_set("english")
         elsif input == "s"
-          spanish_flashcards
+          flashcard_set("spanish")
         elsif input == "exit"
-          "Exiting test mode."
+          "Exiting flashcard mode."
           break
         else
           puts "Invalid input. Let's try this again."
@@ -78,37 +78,38 @@ module SpanishVocab
       end
     end
 
-    def english_flashcards #need to refactor this with spanish flashcards
+    def flashcard_set(language)
       puts "Enter the number of the topic you want to test your knowledge in:"
-      input = gets.chomp.to_i    #need to account for invalid input or exit
-      SpanishVocab::Topic.all[input - 1].vocabulary.each do |vocab|
-        puts "What is #{vocab.translation} in spanish?"
-        input = gets.chomp
-        if input == "#{vocab.spanish}"
-          puts "Correct! Next:"
-        elsif input == "exit"
-          puts "Exiting test."
-          break
-        else
-          puts "Sorry, the answer was #{vocab.spanish}. Next:"
+      puts "If you can't remember the numbers, type list to see topics."
+      input = gets.chomp 
+      if input == "exit"
+        puts "Back to flashcard menu:"
+      elsif input == "list"
+        list_topics
+        flashcard_set(language)
+      elsif input.to_i.between?(1, SpanishVocab::Vocab.all.size)
+        SpanishVocab::Topic.all[input.to_i - 1].vocabulary.each do |vocab|
+          if language == "english"
+            question = vocab.translation
+            answer = vocab.spanish
+          else
+            question = vocab.spanish
+            answer = vocab.translation
+          end
+          puts "How do you say #{question}?"
+          input = gets.chomp
+          if input == "#{answer}"
+            puts "Correct! Next:"
+          elsif input == "exit"
+            puts "Back to flashcard menu:"
+            break
+          else
+            puts "Sorry, the answer was #{answer}. Next:"
+          end
         end
-      end
-    end
-
-    def spanish_flashcards 
-      puts "Enter the number of the topic you want to test your knowledge in:"
-      input = gets.chomp.to_i
-      SpanishVocab::Topic.all[input - 1].vocabulary.each do |vocab|
-        puts "What is #{vocab.spanish} in English?"
-        input = gets.chomp
-        if input == "#{vocab.translation}"
-          puts "Correct! Next:"
-        elsif input == "exit"
-          puts "Exiting test."
-          break
-        else
-          puts "Sorry, the answer was #{vocab.translation}"
-        end
+      else
+        puts "Invalid input. Let's try this again."
+        flashcard_set(language)
       end
     end
 

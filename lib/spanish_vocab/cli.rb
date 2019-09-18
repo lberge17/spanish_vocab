@@ -7,7 +7,7 @@ module SpanishVocab
       list_commands
       main_menu
     end
-    
+
     def loading_message
       puts "Loading application..."
       puts "-----------------------------"
@@ -94,13 +94,13 @@ module SpanishVocab
     def flashcard_set(language)
       puts "Enter the number of the topic you want to test your knowledge in:"
       puts "If you can't remember the numbers, type list to see topics."
-      input = gets.chomp 
+      input = gets.chomp
       if input == "exit"
         puts "Back to flashcards menu:"
       elsif input == "list"
         list_topics
         flashcard_set(language)
-      elsif input.to_i.between?(1, SpanishVocab::Vocab.all.size)
+      elsif input.to_i.between?(1, SpanishVocab::Topic.all.size)
         SpanishVocab::Topic.all[input.to_i - 1].vocabulary.each do |vocab|
           if language == "english"
             question = vocab.translation

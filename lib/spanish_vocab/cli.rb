@@ -23,7 +23,11 @@ module SpanishVocab
 
     def add_vocab
       SpanishVocab::Topic.all.each do |topic|
-        topic.add_vocabulary(SpanishVocab::Scraper.scrape_vocab("https://www.e-spanyol.com/" + topic.link))
+        if topic.name == "Time, days, months"
+           topic.add_vocabulary(SpanishVocab::Scraper.scrape_time_vocab("https://www.e-spanyol.com/" + topic.link))
+        else
+          topic.add_vocabulary(SpanishVocab::Scraper.scrape_vocab("https://www.e-spanyol.com/" + topic.link))
+        end
       end
     end
 

@@ -1,6 +1,3 @@
-require "pry"
-
-
 module SpanishVocab
   class Topic
     attr_accessor :name, :link, :vocabulary

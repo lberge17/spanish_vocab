@@ -30,16 +30,15 @@ module SpanishVocab
     
     def self.scrape_time_vocab(url)
       doc = Nokogiri::HTML(open(url))
-      vocab_array = []
 
-      doc.css("table:first tbody tr").map do |block|
+      vocab_array = doc.css("table:first tbody tr").map do |block|
         if block.css("td")[0] && block.css("td")[1]
-          vocab_array << {:translation => block.css("td")[1].text,
+          {:translation => block.css("td")[1].text,
             :spanish => block.css("td")[0].text
             }
         end
       end
-      vocab_array
+      vocab_array.compact
     end
 
   end

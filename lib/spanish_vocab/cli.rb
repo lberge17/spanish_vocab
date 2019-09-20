@@ -82,10 +82,8 @@ module SpanishVocab
         puts "Would you like the test words in English or in Spanish? Type 'e' or 's'."
         puts "Note: if you wish to exit this mode you can type 'exit' at any time."
         input = gets.chomp
-        if input == "e"
-          flashcard_set("english")
-        elsif input == "s"
-          flashcard_set("spanish")
+        if input == "e" || input == "s"
+          flashcard_set(input)
         elsif input == "exit"
           "Exiting flashcards mode."
           break
@@ -106,7 +104,7 @@ module SpanishVocab
         flashcard_set(language)
       elsif input.to_i.between?(1, SpanishVocab::Topic.all.size)
         SpanishVocab::Topic.all[input.to_i - 1].vocabulary.each do |vocab|
-          if language == "english"
+          if language == "e"
             question = vocab.translation
             answer = vocab.spanish
           else
@@ -148,10 +146,8 @@ module SpanishVocab
         puts "Starting new quiz..."
         puts "Would you like to view the words in English or Spanish? Type 'e' or 's'"
         input = gets.chomp
-        if input == 'e'
-          quiz_set("english")
-        elsif input =='s'
-          quiz_set("spanish")
+        if input == 'e' || input =='s'
+          quiz_set(input)
         elsif input == 'exit'
           break
         else
@@ -165,7 +161,7 @@ module SpanishVocab
       review = []
       10.times do
         vocab = SpanishVocab::Vocab.all[rand(0...SpanishVocab::Vocab.all.size)]
-        if language == "english"
+        if language == "e"
           question = vocab.translation
           answer = vocab.spanish
         else

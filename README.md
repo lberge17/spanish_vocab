@@ -6,29 +6,29 @@ The application starts by showing the user the different options for how to inte
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Fork this repo and clone it.
 
-```ruby
-gem 'spanish_vocab'
-```
-
-And then execute:
+And then from the project directory execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install spanish_vocab
-
 ## Usage
 
-Run bin/run in the terminal while in the spanish_vocab directory to open the CLI application.
+In order to run the application, execute:
+
+    $ bin/run
+
+May need to give the file executable permissions:
+
+    $ chmod +x bin/run
+    
+If you don't want to give executable permissions, you can also run the file by executing:
+
+    $ ruby bin/run
 
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
@@ -36,7 +36,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/lberge
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The repo is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
 ## Code of Conduct
 
